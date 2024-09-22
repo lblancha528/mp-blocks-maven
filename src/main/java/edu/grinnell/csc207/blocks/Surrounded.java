@@ -4,7 +4,8 @@ package edu.grinnell.csc207.blocks;
  * A text block surrounded by a single letter.
  *
  * @author Samuel A. Rebelsky
- * @author Your Name Here
+ * @author Lily Blanchard
+ * @author Sarah Deschamps
  */
 public class Surrounded implements AsciiBlock {
   // +--------+------------------------------------------------------------
@@ -19,7 +20,7 @@ public class Surrounded implements AsciiBlock {
   /**
    * The character we put around the box.
    */
-  String surroundChar;
+  String boxChar;
 
   // +--------------+------------------------------------------------------
   // | Constructors |
@@ -31,13 +32,13 @@ public class Surrounded implements AsciiBlock {
    * @param blockContents
    *   The contents of the block.
    *
-   * @param theChar
+   * @param surroundChar
    *   The character that we use to surround the block.
    */
-  public Surrounded(AsciiBlock blockContents, char theChar) {
+  public Surrounded(AsciiBlock blockContents, char surroundChar) {
     this.contents = blockContents;
-    this.surroundChar = Character.toString(theChar);
-  } // Surrounded(AsciiBlock)
+    this.boxChar = Character.toString(surroundChar);
+  } // Boxed(AsciiBlock)
 
   // +---------+-----------------------------------------------------------
   // | Methods |
@@ -54,7 +55,16 @@ public class Surrounded implements AsciiBlock {
    *   If the row is invalid.
    */
   public String row(int i) throws Exception {
-    throw new Exception("Not yet implemented"); // STUB
+    int h = this.contents.height();
+    if (i == 0 || i == h + 1) {
+      // The top of the box
+      return this.boxChar.repeat((this.contents.width()) + 2);
+    } else if ((i > 0) && (i <= h)) {
+      // Stuff within the box
+      return this.boxChar + this.contents.row(i - 1) + this.boxChar;
+    } else {
+      throw new Exception("Invalid row " + i);
+    } // if/else
   } // row(int)
 
   /**
@@ -63,28 +73,15 @@ public class Surrounded implements AsciiBlock {
    * @return the number of rows
    */
   public int height() {
-    return 0;   // STUB
+    return this.contents.height() + 2;
   } // height()
 
   /**
    * Determine how many columns are in the block.
    *
-   * @return the number of columns
+   * @return the numbrer of columns
    */
   public int width() {
-    return 0;   // STUB
+    return this.contents.width() + 2;
   } // width()
-
-  /**
-   * Determine if another block is structurally equivalent to this block.
-   *
-   * @param other
-   *   The block to compare to this block.
-   *
-   * @return true if the two blocks are structurally equivalent and
-   *    false otherwise.
-   */
-  public boolean eqv(AsciiBlock other) {
-    return false;       // STUB
-  } // eqv(AsciiBlock)
 } // class Surrounded
