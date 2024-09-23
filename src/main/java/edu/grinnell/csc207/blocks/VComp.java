@@ -1,6 +1,7 @@
 package edu.grinnell.csc207.blocks;
 
 import java.util.Arrays;
+import edu.grinnell.csc207.blocks.HAlignment;
 
 /**
  * The vertical composition of blocks.
@@ -50,13 +51,7 @@ public class VComp implements AsciiBlock {
    * @param alignment
    *   The alignment of the blocks.
    * @param blocksToCompose
-   *   The blocks we will be composing.
-   */
-  public VComp(HAlignment alignment, AsciiBlock[] blocksToCompose) {
-    this.align = alignment;
-    this.blocks = Arrays.copyOf(blocksToCompose, blocksToCompose.length);
-  } // VComp(HAlignment, AsciiBLOCK[])
-
+   *   The blocks we will be composing.LEFT
   // +---------+-----------------------------------------------------------
   // | Methods |
   // +---------+
@@ -72,8 +67,45 @@ public class VComp implements AsciiBlock {
    *   if i is outside the range of valid rows.
    */
   public String row(int i) throws Exception {
-    return "";  // STUB
+    int gap = findGap(blocks[i]);
+    String Lgap = "";
+    String Rgap = "";
+    if ((gap % 2) == 1) {
+      // if gap is odd, put larger chunk in Rgap
+      Lgap = " ".repeat(gap);
+      Rgap = " ".repeat(gap + 1);
+    } else {
+      Lgap = " ".repeat(gap);
+      Rgap = " ".repeat(gap);
+    } // else
+
+    String roww = "";
+    if (align == HAlignment.LEFT) {
+      roww = blocks[i] + Lgap + Rgap;
+    } else if (align == HAlignment.CENTER) {
+      roww = Lgap + blocks[i] + Rgap;
+    } else if (align == HAlignment.RIGHT) {
+      roww = Lgap + Rgap + blocks[i];
+    } else {
+      System.err.println("ERROR: Invalid alignment.");
+    }
+    return roww;
   } // row(int)
+
+  /**
+   * Get the top and bottom gap size for a block.
+   * Prioritizes less space on top.
+   * 
+   * @param block
+   *   the block to be analyzed
+   * @return gap
+   *   the number of spaces needed either side of the block
+   */
+  public int findGap(AsciiBlock block) {
+    int gap = this.width() - block.width();
+    gap /= 2;
+    return gap;
+  } // findGap(AsciiBlock)
 
   /**
    * Determine how many rows are in the block.
