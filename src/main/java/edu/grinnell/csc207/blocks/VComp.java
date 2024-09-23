@@ -81,7 +81,13 @@ public class VComp implements AsciiBlock {
    * @return the number of rows
    */
   public int height() {
-    return 0;   // STUB
+    int tall = 0;
+    for (int i = 0; i < blocks.length; i++) {
+      if (blocks[i].height() > tall) {
+        tall = blocks[i].height();
+      } // if
+    } // for
+    return tall;
   } // height()
 
   /**
@@ -90,7 +96,11 @@ public class VComp implements AsciiBlock {
    * @return the number of columns
    */
   public int width() {
-    return 0;   // STUB
+    int wide = 0;
+    for (int i = 0; i < blocks.length; i++) {
+      wide += blocks[i].width();
+    } // for
+    return wide;
   } // width()
 
   /**

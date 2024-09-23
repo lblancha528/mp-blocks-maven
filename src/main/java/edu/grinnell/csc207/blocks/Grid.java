@@ -62,15 +62,15 @@ public class Grid implements AsciiBlock {
    *   If the row is invalid.
    */
   public String row(int i) throws Exception {
-
+    // set i to a valid row index for the element
     while (i > element.height()) {
       i -= element.height();
     } //while
 
-    String roww ="";
+    String roww = "";
     for (int inde = 0; inde <= hreps; inde++) {
       roww = roww.concat(element.row(i));
-    }
+    } // for
     return roww;
   } // row(int)
 
@@ -115,7 +115,7 @@ public class Grid implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(Grid other) {
-    return (this.hreps == other.hreps) && (this.vreps == other.hreps)
+    return (this.hreps == other.hreps) && (this.vreps == other.vreps)
         && (this.element.eqv(other.element));
   } // eqv(Grid)
 } // class Grid

@@ -1,0 +1,3 @@
+- Implement AsciiBlock.eqv()
+        - VComp.eqv()
+        - VComp.row()
