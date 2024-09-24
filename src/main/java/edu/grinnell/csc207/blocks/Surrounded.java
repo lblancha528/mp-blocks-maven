@@ -1,19 +1,21 @@
 package edu.grinnell.csc207.blocks;
 
+import java.io.PrintWriter;
+
 /**
  * A text block surrounded by a single letter.
  *
- * @author Samuel A. Rebelsky
  * @author Lily Blanchard
- * @author Sarah Deschamps
+ * @author Tiffany Yan
  */
 public class Surrounded implements AsciiBlock {
-  // +--------+------------------------------------------------------------
+  // +--------+------------------------------------------------------
   // | Fields |
   // +--------+
 
   /**
    * The stuff in the box.
+   * Copied from Lab 6 with Sarah Deschamps
    */
   AsciiBlock contents;
 
@@ -22,23 +24,89 @@ public class Surrounded implements AsciiBlock {
    */
   String boxChar;
 
-  // +--------------+------------------------------------------------------
-  // | Constructors |
-  // +--------------+
+  // +----------------+----------------------------------------------
+  // | Static methods |
+  // +----------------+
 
   /**
-   * Build a new block with the specified contents.
+   * Print out a block.
    *
-   * @param blockContents
-   *   The contents of the block.
+   * @param pen
+   *   The PrintWriter used to print the block.
    *
-   * @param surroundChar
-   *   The character that we use to surround the block.
+   * @param block
+   *   The block to print.
    */
-  public Surrounded(AsciiBlock blockContents, char surroundChar) {
-    this.contents = blockContents;
-    this.boxChar = Character.toString(surroundChar);
-  } // Boxed(AsciiBlock)
+  public static void print(PrintWriter pen, AsciiBlock block) {
+    for (int i = 0; i < block.height(); i++) {
+      try {
+        pen.println(block.row(i));
+      } catch (Exception e) {
+        pen.printf("*** ERROR: Missing row %d ***\n", i);
+      } // try/catch
+    } // for
+  } // print(PrintWriter, AsciiBlock)
+
+  /**
+   * Determine if two blocks are equal in that they occupy the same
+   * memory location.
+   *
+   * @param block1
+   *   One of the two blocks.
+   * @param block2
+   *   The other block.
+   *
+   * @return true if they are in the same memory location and false otherwise.
+   */
+  public static boolean eq(AsciiBlock block1, AsciiBlock block2) {
+    return block1 == block2;
+  } // eq(AsciiBlock, AsciiBlock)
+
+  /**
+   * Determine if two blocks are equal in that they are structurally
+   * equivalent. That is, two blocks are equal in this sense if they
+   * were created with the same set of nested constructor calls.
+   *
+   * @param block1
+   *   One of the two blocks.
+   * @param block2
+   *   The other block.
+   *
+   * @return true if they are structurally equivalent and false otherwise.
+   */
+  public static boolean eqv(AsciiBlock block1, AsciiBlock block2) {
+    return false;      // STUB
+  } // eqv(AsciiBlock, AsciiBlock)
+
+  /**
+   * Determine if two blocks are equal in that they have the same,
+   * width, height, and rows.
+   *
+   * @param block1
+   *   One of the two blocks.
+   * @param block2
+   *   The other block.
+   *
+   * @return true if they are in the same memory location and false otherwise.
+   */
+  public static boolean equal(AsciiBlock block1, AsciiBlock block2) {
+    if (block1.width() != block2.width()) {
+      return false;
+    } // if
+    if (block1.height() != block2.height()) {
+      return false;
+    } // if
+    for (int i = 0; i < block1.height(); i++) {
+      try {
+        if (!block1.row(i).equals(block2.row(i))) {
+          return false;
+        } // if
+      } catch (Exception e) {
+        return false;
+      } // try/catch
+    } // for
+    return true;
+  } // equal(AsciiBlock, AsciiBlock)
 
   // +---------+-----------------------------------------------------------
   // | Methods |
@@ -51,8 +119,11 @@ public class Surrounded implements AsciiBlock {
    *
    * @return row i.
    *
+   * @pre
+   *   0 <= i < this.height()
+   *
    * @exception Exception
-   *   If the row is invalid.
+   *   if the row number is invalid.
    */
   public String row(int i) throws Exception {
     int h = this.contents.height();
@@ -74,14 +145,27 @@ public class Surrounded implements AsciiBlock {
    */
   public int height() {
     return this.contents.height() + 2;
-  } // height()
+  };
 
   /**
    * Determine how many columns are in the block.
    *
-   * @return the numbrer of columns
+   * @return the number of columns
    */
   public int width() {
     return this.contents.width() + 2;
-  } // width()
+  };
+
+  /**
+   * Determine if another block is structurally equivalent to this block.
+   *
+   * @param other
+   *   The block to compare to this block.
+   *
+   * @return true if the two blocks are structurally equivalent and
+   *    false otherwise.
+   */
+  public boolean eqv(AsciiBlock other) {
+    return false; //STUB
+  } // eqv(AsciiBlock)
 } // class Surrounded
