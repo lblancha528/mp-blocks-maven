@@ -4,7 +4,7 @@ package edu.grinnell.csc207.blocks;
  * A horizontally flipped ASCII block.
  *
  * @author Samuel A. Rebelsky
- * @author Your Name Here
+ * @author Tiffany and lily
  */
 public class HFlip implements AsciiBlock {
   // +--------+------------------------------------------------------------
@@ -45,7 +45,19 @@ public class HFlip implements AsciiBlock {
    *   If the row is invalid.
    */
   public String row(int i) throws Exception {
-    throw new Exception("Not yet implemented"); // STUB
+    String roww = "";
+    int maxheight = this.height();
+    int maxwidth = this.width();
+
+    if (i > maxheight){
+      System.err.println("the value exceeds the maximum height available");
+    } //if
+
+    for (int index = maxwidth - 1; index >= 0; index--) {
+      roww = roww + this.block.row(i).charAt(index);
+    } //for
+
+    return roww;
   } // row(int)
 
   /**
@@ -54,7 +66,7 @@ public class HFlip implements AsciiBlock {
    * @return the number of rows
    */
   public int height() {
-    return 0;   // STUB
+    return this.block.height();
   } // height()
 
   /**
@@ -63,7 +75,7 @@ public class HFlip implements AsciiBlock {
    * @return the number of columns
    */
   public int width() {
-    return 0;   // STUB
+    return this.block.width();
   } // width()
 
   /**

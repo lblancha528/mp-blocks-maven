@@ -6,7 +6,7 @@ import java.util.Arrays;
  * The horizontal composition of blocks.
  *
  * @author Samuel A. Rebelsky
- * @author Your Name Here
+ * @author Tiffany and Lily
  */
 public class HComp implements AsciiBlock {
   // +--------+------------------------------------------------------------
@@ -71,7 +71,35 @@ public class HComp implements AsciiBlock {
    *   if i is outside the range of valid rows.
    */
   public String row(int i) throws Exception {
-    return "";  // STUB
+    String roww = "";
+    int maxheight = this.height();
+    int offset = -1;
+    
+    for (int index = 0; index < this.blocks.length; index++) {
+      int blockwidth = this.blocks[index].width();
+      int blockheight = this.blocks[index].height();
+
+      if (i > maxheight) {
+        throw new Exception("ERROR: Out of bound value!");
+      } //if
+
+      if (this.align == VAlignment.TOP){
+        offset = 0;
+      } else if (this.align == VAlignment.CENTER) {
+        offset = (maxheight - blockheight) / 2;
+      } else if (this.align == VAlignment.BOTTOM) {
+        offset = maxheight - blockheight;
+      } else {
+        System.err.println("Error: Invalid alignment!");
+      } //if
+
+      if (i < offset || i >= offset + blockheight) {
+        roww = roww.concat(" ".repeat(blockwidth));
+      } else {
+        roww = roww.concat(this.blocks[i].row(i - offset));
+      } //if
+    } //for
+    return roww;
   } // row(int)
 
   /**
@@ -80,7 +108,13 @@ public class HComp implements AsciiBlock {
    * @return the number of rows
    */
   public int height() {
-    return 0;   // STUB
+    int max = 0;
+    for (int i = 0; i < this.blocks.length; i++) {
+      if (max < this.blocks[i].height()) {
+        max = this.blocks[i].height();
+      } //if
+    } //for
+    return max;
   } // height()
 
   /**
@@ -89,7 +123,11 @@ public class HComp implements AsciiBlock {
    * @return the number of columns
    */
   public int width() {
-    return 0;   // STUB
+    int sum = 0;
+    for (int i = 0; i < this.blocks.length; i++) {
+      sum += this.blocks[i].width();
+    } //for
+    return sum;
   } // width()
 
   /**
