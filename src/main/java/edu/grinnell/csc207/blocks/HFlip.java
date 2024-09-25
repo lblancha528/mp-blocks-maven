@@ -1,5 +1,5 @@
 package edu.grinnell.csc207.blocks;
-
+import java.util.Arrays;
 /**
  * A horizontally flipped ASCII block.
  *
@@ -53,9 +53,10 @@ public class HFlip implements AsciiBlock {
       System.err.println("the value exceeds the maximum height available");
     } //if
 
-    for (int index = maxwidth - 1; index >= 0; index--) {
-      roww = roww + this.block.row(i).charAt(index);
+    for (int index = 0; index < maxwidth; index++) {
+      roww = block.row(i).charAt(index) + roww;
     } //for
+
 
     return roww;
   } // row(int)
@@ -66,7 +67,7 @@ public class HFlip implements AsciiBlock {
    * @return the number of rows
    */
   public int height() {
-    return this.block.height();
+    return block.height();
   } // height()
 
   /**
@@ -75,7 +76,7 @@ public class HFlip implements AsciiBlock {
    * @return the number of columns
    */
   public int width() {
-    return this.block.width();
+    return block.width();
   } // width()
 
   /**

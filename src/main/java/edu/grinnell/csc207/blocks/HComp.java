@@ -74,14 +74,15 @@ public class HComp implements AsciiBlock {
     String roww = "";
     int maxheight = this.height();
     int offset = -1;
+
+    if (i > maxheight) {
+      throw new Exception("ERROR: Out of bound value!");
+    } //if
     
     for (int index = 0; index < this.blocks.length; index++) {
       int blockwidth = this.blocks[index].width();
       int blockheight = this.blocks[index].height();
-
-      if (i > maxheight) {
-        throw new Exception("ERROR: Out of bound value!");
-      } //if
+      AsciiBlock block = this.blocks[index];
 
       if (this.align == VAlignment.TOP){
         offset = 0;
@@ -90,13 +91,13 @@ public class HComp implements AsciiBlock {
       } else if (this.align == VAlignment.BOTTOM) {
         offset = maxheight - blockheight;
       } else {
-        System.err.println("Error: Invalid alignment!");
+        throw new Exception("Error: Invalid alignment!");
       } //if
 
       if (i < offset || i >= offset + blockheight) {
         roww = roww.concat(" ".repeat(blockwidth));
       } else {
-        roww = roww.concat(this.blocks[i].row(i - offset));
+        roww = roww.concat(block.row(index));
       } //if
     } //for
     return roww;
