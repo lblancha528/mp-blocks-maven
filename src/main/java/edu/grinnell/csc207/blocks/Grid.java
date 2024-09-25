@@ -63,12 +63,12 @@ public class Grid implements AsciiBlock {
    */
   public String row(int i) throws Exception {
     // set i to a valid row index for the element
-    while (i > element.height()) {
+    while (i >= element.height()) {
       i -= element.height();
     } //while
 
     String roww = "";
-    for (int inde = 0; inde <= hreps; inde++) {
+    for (int inde = 0; inde < hreps; inde++) {
       roww = roww.concat(element.row(i));
     } // for
     return roww;
