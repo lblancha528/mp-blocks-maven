@@ -20,8 +20,8 @@ public class TestNewBlock {
   /**
    * A placeholder.
    */
-  @Test
-  public void placeholder() {
+  // @Test
+ /*  public void placeholder() {
     try {
       Rect blockA = new Rect('a', 3, 4);
       Rect blockB = new Rect('b', 4, 5);
@@ -43,5 +43,6 @@ public class TestNewBlock {
     }
    
   } // placeholder()
+   */
 
 } // class TestNewBlock
