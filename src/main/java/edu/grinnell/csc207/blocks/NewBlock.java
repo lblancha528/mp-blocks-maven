@@ -56,8 +56,6 @@ public class NewBlock implements AsciiBlock {
    *   if the row number is invalid.
    */
   public String row(int i) throws Exception {
-    int maxHeight = this.height();
-
     if (i % 2 == 1) {
       i = (i - 1) / 2;
       return blockA.row(i);
