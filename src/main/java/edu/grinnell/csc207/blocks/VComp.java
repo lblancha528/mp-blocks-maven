@@ -73,38 +73,44 @@ public class VComp implements AsciiBlock {
    *   if i is outside the range of valid rows.
    */
   public String row(int i) throws Exception {
+    String roww = "";
+    if (i > this.height()) {
+      throw new Exception("ERROR: Out of bound value!");
+    } //if
+
     int j = 0;
-    for (; j < blocks.length; j++) {
-      if (i > blocks[j].height()) {
-        i -= blocks[j].height();
-      } // if
-    } // for
+    while (i >= blocks[j].height()) {
+      i -= blocks[j].height();
+      j++;
+    } // while
     // j is now a valid row in the right block
 
     int gap = findGap(blocks[j]);
     String Lgap = "";
     String Rgap = "";
+    String Fgap = "";
     if ((gap % 2) == 1) {
       // if gap is odd, put larger chunk in Rgap
-      Lgap = " ".repeat(gap);
-      Rgap = " ".repeat(gap + 1);
+      Fgap = " ".repeat(gap);
+      Lgap = " ".repeat(gap / 2);
+      Rgap = " ".repeat(gap / 2 + 1);
     } else {
-      Lgap = " ".repeat(gap);
-      Rgap = " ".repeat(gap);
+      Fgap = " ".repeat(gap);
+      Lgap = " ".repeat(gap / 2);
+      Rgap = " ".repeat(gap / 2);
     } // else
 
-    String roww = "";
     if (align == HAlignment.LEFT) {
-      roww = blocks[j].row(i) + Lgap + Rgap;
+      roww = blocks[j].row(i).concat(Fgap);
     } else if (align == HAlignment.CENTER) {
-      roww = Lgap + blocks[i].row(i) + Rgap;
+      roww = Lgap.concat(blocks[j].row(i));
+      roww = roww.concat(Rgap);
     } else if (align == HAlignment.RIGHT) {
-      roww = Lgap + Rgap + blocks[i].row(i);
+      roww = Fgap.concat(blocks[j].row(i));
     } else {
       System.err.println("ERROR: Invalid alignment.");
     }
     return roww;
-    
   } // row(int)
 
   /**
@@ -118,7 +124,6 @@ public class VComp implements AsciiBlock {
    */
   public int findGap(AsciiBlock block) {
     int gap = this.width() - block.width();
-    gap /= 2;
     return gap;
   } // findGap(AsciiBlock)
 
@@ -130,9 +135,7 @@ public class VComp implements AsciiBlock {
   public int height() {
     int tall = 0;
     for (int i = 0; i < blocks.length; i++) {
-      if (blocks[i].height() > tall) {
-        tall = blocks[i].height();
-      } // if
+      tall += blocks[i].height();
     } // for
     return tall;
   } // height()
@@ -145,7 +148,9 @@ public class VComp implements AsciiBlock {
   public int width() {
     int wide = 0;
     for (int i = 0; i < blocks.length; i++) {
-      wide += blocks[i].width();
+      if (blocks[i].width() > wide) {
+        wide = blocks[i].width();
+      } // if
     } // for
     return wide;
   } // width()

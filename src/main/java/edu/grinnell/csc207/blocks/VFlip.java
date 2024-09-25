@@ -45,7 +45,7 @@ public class VFlip implements AsciiBlock {
    *   If the row is invalid.
    */
   public String row(int i) throws Exception {
-    return block.row(block.height() - i);
+    return block.row(block.height() - i - 1);
   } // row(int)
 
   /**
