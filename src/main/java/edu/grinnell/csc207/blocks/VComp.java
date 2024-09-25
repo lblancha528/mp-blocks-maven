@@ -1,7 +1,6 @@
 package edu.grinnell.csc207.blocks;
 
 import java.util.Arrays;
-import edu.grinnell.csc207.blocks.HAlignment;
 
 /**
  * The vertical composition of blocks.
@@ -52,6 +51,13 @@ public class VComp implements AsciiBlock {
    *   The alignment of the blocks.
    * @param blocksToCompose
    *   The blocks we will be composing.LEFT
+   */
+
+  public VComp(HAlignment alignment, AsciiBlock[] blocksToCompose) {
+    this.align = alignment;
+    this.blocks = Arrays.copyOf(blocksToCompose, blocksToCompose.length);
+  } // HComp(Alignment, AsciiBLOCK[])
+
   // +---------+-----------------------------------------------------------
   // | Methods |
   // +---------+
@@ -67,7 +73,15 @@ public class VComp implements AsciiBlock {
    *   if i is outside the range of valid rows.
    */
   public String row(int i) throws Exception {
-    int gap = findGap(blocks[i]);
+    int j = 0;
+    for (; j < blocks.length; j++) {
+      if (i > blocks[j].height()) {
+        i -= blocks[j].height();
+      } // if
+    } // for
+    // j is now a valid row in the right block
+
+    int gap = findGap(blocks[j]);
     String Lgap = "";
     String Rgap = "";
     if ((gap % 2) == 1) {
@@ -81,15 +95,16 @@ public class VComp implements AsciiBlock {
 
     String roww = "";
     if (align == HAlignment.LEFT) {
-      roww = blocks[i] + Lgap + Rgap;
+      roww = blocks[j].row(i) + Lgap + Rgap;
     } else if (align == HAlignment.CENTER) {
-      roww = Lgap + blocks[i] + Rgap;
+      roww = Lgap + blocks[i].row(i) + Rgap;
     } else if (align == HAlignment.RIGHT) {
-      roww = Lgap + Rgap + blocks[i];
+      roww = Lgap + Rgap + blocks[i].row(i);
     } else {
       System.err.println("ERROR: Invalid alignment.");
     }
     return roww;
+    
   } // row(int)
 
   /**

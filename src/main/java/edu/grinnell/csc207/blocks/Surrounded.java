@@ -24,6 +24,23 @@ public class Surrounded implements AsciiBlock {
    */
   String boxChar;
 
+  // +--------------+------------------------------------------------
+  // | Constructors |
+  // +--------------+
+
+  // line, char
+  // rect, char
+
+  /**
+   * Construct a block by surrounding the provided AsciiBlock with the provided character.
+   * @param block
+   * @param char
+   */
+  public Surrounded(AsciiBlock block, char ch) {
+    this.contents = block;
+    this.boxChar = ch + "";
+  }
+
   // +----------------+----------------------------------------------
   // | Static methods |
   // +----------------+
