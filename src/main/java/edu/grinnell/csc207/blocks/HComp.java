@@ -63,26 +63,26 @@ public class HComp implements AsciiBlock {
   /**
    * Get one row from the block.
    *
-   * @param i the number of the row
+   * @param rowNum the number of the row
    *
-   * @return row i.
+   * @return row rowNum.
    *
    * @exception Exception
    *   if i is outside the range of valid rows.
    */
-  public String row(int i) throws Exception {
+  public String row(int rowNum) throws Exception {
     String roww = "";
     int maxheight = this.height();
     int offset = -1;
 
-    if (i > maxheight) {
+    if (rowNum > maxheight) {
       throw new Exception("ERROR: Out of bound value!");
     } //if
     
-    for (int index = 0; index < this.blocks.length; index++) {
-      int blockwidth = this.blocks[index].width();
-      int blockheight = this.blocks[index].height();
-      AsciiBlock block = this.blocks[index];
+    for (int blockNum = 0; blockNum < this.blocks.length; blockNum++) {
+      int blockwidth = this.blocks[blockNum].width();
+      int blockheight = this.blocks[blockNum].height();
+      AsciiBlock block = this.blocks[blockNum];
 
       if (this.align == VAlignment.TOP){
         offset = 0;
@@ -94,10 +94,10 @@ public class HComp implements AsciiBlock {
         throw new Exception("Error: Invalid alignment!");
       } //if
 
-      if (i < offset || i >= offset + blockheight) {
+      if (rowNum < offset || rowNum >= offset + blockheight) {
         roww = roww.concat(" ".repeat(blockwidth));
       } else {
-        roww = roww.concat(block.row(index));
+        roww = roww.concat(block.row(rowNum-offset));
       } //if
     } //for
     return roww;
