@@ -56,12 +56,15 @@ public class NewBlock implements AsciiBlock {
    *   if the row number is invalid.
    */
   public String row(int i) throws Exception {
+    if (i > this.height()) {
+      throw new Exception("Error: Row does not exist!");
+    }
     if (i % 2 == 1) {
-      i = (i - 1) / 2;
-      return blockA.row(i);
+      int idex = (i - 1) / 2;
+      return blockA.row(idex);
     } else {
-      i = (i / 2) - 1;
-      return blockB.row(i);
+      int idex = (i / 2) - 1;
+      return blockB.row(idex);
     } // if
   } // row(int)
 
