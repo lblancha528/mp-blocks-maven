@@ -1,3 +1,2 @@
 - Implement AsciiBlock.eqv()
-        - VComp.eqv()
-        - VFlip.eqv()
+        - NewBlock does not handle composing with NewBlocks

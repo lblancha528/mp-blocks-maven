@@ -59,12 +59,14 @@ public class NewBlock implements AsciiBlock {
     if (i > this.height()) {
       throw new Exception("Error: Row does not exist!");
     }
-    if (i % 2 == 1) {
-      int idex = (i - 1) / 2;
-      return blockA.row(idex);
+    if (i == 0) {
+      return blockA.row(0);
+    } else if (i % 2 == 1) {
+      int index = (i - 1) / 2;
+      return blockB.row(index);
     } else {
-      int idex = (i / 2) - 1;
-      return blockB.row(idex);
+      int index = (i / 2);
+      return blockA.row(index);
     } // if
   } // row(int)
 
