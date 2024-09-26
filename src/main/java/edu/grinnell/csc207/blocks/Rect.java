@@ -98,8 +98,21 @@ public class Rect implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;       // STUB
+    return ((other instanceof Rect) && (this.eqv((Rect) other)));
   } // eqv(AsciiBlock)
+
+   /**
+   * Determine if another rect is structurally equivalent to this grid.
+   *
+   * @param other
+   *   The grid to compare to this grid.
+   *
+   * @return true if the two blocks are structurally equivalent and
+   *    false otherwise.
+   */
+  public boolean eqv(Rect other) {
+    return (this.height == other.height) && (this.row.equals(other.row));
+  } // eqv(Grid)
 
   // +---------------+-----------------------------------------------
   // | Other methods |

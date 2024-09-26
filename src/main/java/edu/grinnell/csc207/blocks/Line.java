@@ -78,8 +78,21 @@ public class Line implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;       // STUB
+    return ((other instanceof Line) && (this.eqv((Line) other)));
   } // eqv(AsciiBlock)
+
+ /**
+   * Determine if another grid is structurally equivalent to this grid.
+   *
+   * @param other
+   *   The grid to compare to this grid.
+   *
+   * @return true if the two blocks are structurally equivalent and
+   *    false otherwise.
+   */
+  public boolean eqv(Line other) {
+    return other.line.equals(this.line);
+  } // eqv(Grid)
 
   // +---------------+-----------------------------------------------
   // | Other methods |

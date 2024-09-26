@@ -165,6 +165,20 @@ public class VComp implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;       // STUB
+    return ((other instanceof VComp) && (this.eqv((VComp) other)));
   } // eqv(AsciiBlock)
+
+  /**
+   * Determine if another grid is structurally equivalent to this grid.
+   *
+   * @param other
+   *   The grid to compare to this grid.
+   *
+   * @return true if the two blocks are structurally equivalent and
+   *    false otherwise.
+   */
+  public boolean eqv(VComp other) {
+    return (Arrays.equals(this.blocks, other.blocks) && this.align == other.align);
+  } // eqv(Grid)
+  
 } // class VComp

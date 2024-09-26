@@ -76,6 +76,20 @@ public class VFlip implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;       // STUB
+    return ((other instanceof VFlip) && (this.eqv((VFlip) other)));
   } // eqv(AsciiBlock)
+
+  /**
+   * Determine if another grid is structurally equivalent to this grid.
+   *
+   * @param other
+   *   The VFlip to compare to this VFlip.
+   *
+   * @return true if the two blocks are structurally equivalent and
+   *    false otherwise.
+   */
+  public boolean eqv(VFlip other) {
+    return this.block.eqv(other.block);
+  } // eqv(Grid)
+  
 } // class VFlip

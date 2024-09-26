@@ -92,8 +92,25 @@ public class Surrounded implements AsciiBlock {
    * @return true if they are structurally equivalent and false otherwise.
    */
   public static boolean eqv(AsciiBlock block1, AsciiBlock block2) {
-    return false;      // STUB
+    return ((block1 instanceof Surrounded) && (block1.eqv((Surrounded) block1)) && 
+    (block2 instanceof Surrounded) && (block2.eqv((Surrounded) block2)));
   } // eqv(AsciiBlock, AsciiBlock)
+
+
+
+  /**
+   * Determine if another grid is structurally equivalent to this grid.
+   *
+   * @param block1
+   *   One of the two blocks
+   * @param block2
+   *   The other block.
+   * @return true if the two blocks are structurally equivalent and
+   *    false otherwise.
+   */
+  public boolean eqv(Surrounded block1, Surrounded block2) {
+    return (block1.contents.eqv(block2.contents) && block1.boxChar.equals(block2.boxChar));
+  } // eqv(Surrounded, surrounded)
 
   /**
    * Determine if two blocks are equal in that they have the same,
