@@ -2,6 +2,8 @@ package edu.grinnell.csc207.blocks;
 
 /**
  * This function prints two blocks together, alternating their rows.
+ * @author Lily Blanchard
+ * @author Tiffany Yan
  */
 public class NewBlock implements AsciiBlock {
   // +--------+------------------------------------------------------------
