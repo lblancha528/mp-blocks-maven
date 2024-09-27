@@ -31,14 +31,14 @@ public class NewBlock implements AsciiBlock {
    * Build a NewBlock from two AsciiBlocks.
    * The new block will 'shuffle' the two blocks together
    * by alteranating lines from each.
-   * @param blockA
+   * @param blockOne
    *    the first AsciiBlock to mix, odd lines
-   * @param blockB
+   * @param blockTwo
    *    the second AsciiBlock to mix, even lines
    */
-  public NewBlock(AsciiBlock blockA, AsciiBlock blockB) {
-    this.blockA = blockA;
-    this.blockB = blockB;
+  public NewBlock(AsciiBlock blockOne, AsciiBlock blockTwo) {
+    this.blockA = blockOne;
+    this.blockB = blockTwo;
     if (blockA.height() > blockB.height()) {
       this.smaller = blockB;
     } else if (blockB.height() > blockA.height()) {
