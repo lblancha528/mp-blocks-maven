@@ -22,6 +22,7 @@ import edu.grinnell.csc207.blocks.VFlip;
 import edu.grinnell.csc207.blocks.VAlignment;
 import edu.grinnell.csc207.blocks.HAlignment;
 import edu.grinnell.csc207.blocks.Surrounded;
+import edu.grinnell.csc207.blocks.Empty;
 
 /**
  * Tests of the new block.
@@ -129,7 +130,7 @@ public class TestNewBlock {
   public void newBlockWithBoxedTests() {
     try {
       Grid ampAndPercGrid = new Grid(new Line("&%"), 3, 4);
-      Boxed emptyBox = new Boxed(new Line(""));
+      Boxed emptyBox = new Boxed(new Empty());
       Boxed helloBox = new Boxed(new Line("hello"));
       Boxed gridBox = new Boxed(ampAndPercGrid);
       Boxed doubleBoxed = new Boxed(helloBox);
@@ -140,7 +141,7 @@ public class TestNewBlock {
       assertEquals(7, emptyAndHello.width(), "empty/hello width");
       assertEquals(8, helloAndGrid.width(), "hello/grid width");
       assertEquals(9, helloAndDouble.width(), "hello/double width");
-      assertEquals(6, emptyAndHello.height(), "empty/hello height");
+      assertEquals(4, emptyAndHello.height(), "empty/hello height");
       assertEquals(6, helloAndGrid.height(), "hello/grid height");
       assertEquals(6, helloAndDouble.height(), "hello/double height");
       
@@ -222,7 +223,7 @@ public class TestNewBlock {
                      howdy  
                     aaa
                     farewell
-                    aaa
+                    aaa     
                     """
       , TestUtils.toString(vAndV), "greetings/aBye");
       assertEquals("""
@@ -248,7 +249,24 @@ public class TestNewBlock {
   @Test
   public void newBlockWithSurroundedTests() {
     try {
+      Surrounded xWithS = new Surrounded(new Rect('X', 3, 4), 'S');
+      Surrounded pWithV = new Surrounded(new Rect('P', 5, 2), 'V');
+      NewBlock xSpVMix = new NewBlock(xWithS, pWithV);
 
+      assertEquals(7, xSpVMix.width(), "mix width");
+      assertEquals(8, xSpVMix.height(), "mix height");
+
+      assertEquals("""
+                    SSSSS
+                    VVVVVVV
+                    SXXXS
+                    VPPPPPV
+                    SXXXS
+                    VPPPPPV
+                    SXXXS
+                    VVVVVVV
+                    """
+      , TestUtils.toString(xSpVMix), "xSpVMix");
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -260,22 +278,33 @@ public class TestNewBlock {
   @Test
   public void newBlockWithFlipTests() {
     try {
+      Line hello = new Line("hello");
+      Line goodbye = new Line("goodbye");
+      Line howdydo = new Line("howdydo");
+      VComp greetings = new VComp(HAlignment.CENTER, new AsciiBlock[] {hello, goodbye, howdydo});
+      HFlip sgniteerg = new HFlip(greetings);
+      VFlip flippedGreetings = new VFlip(greetings);
+      NewBlock forwardAndBack = new NewBlock(greetings, sgniteerg);
+      NewBlock upAndDown = new NewBlock(greetings, flippedGreetings);
+
+      assertEquals(7, forwardAndBack.width(), "forward/back width");
+      assertEquals(7, upAndDown.width(), "up/down width");
+      assertEquals(6, forwardAndBack.height(), "forward/back height");
+      assertEquals(6, upAndDown.height(), "up/down height");
+
+      assertEquals("""
+                     hello 
+                     olleh 
+                    goodbye
+                    eybdoog
+                    howdydo
+                    odydwoh
+                    """
+      , TestUtils.toString(forwardAndBack), "forwardAndBack");
 
     } catch (Exception e) {
       e.printStackTrace();
     }
   } // newBlockWithFlipTests()
-
-  /**
-   * Some tests for NewBlock given NewBlock blocks.
-   */
-  @Test
-  public void newBlockWithNewBlockTests() {
-    try {
-
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  } // newBlockWithNewBlockTests()
 
 } // class TestNewBlock
