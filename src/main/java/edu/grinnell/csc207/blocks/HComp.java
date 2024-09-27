@@ -145,15 +145,23 @@ public class HComp implements AsciiBlock {
   } // eqv(AsciiBlock)
 
     /**
-   * Determine if another grid is structurally equivalent to this grid.
+   * Determine if another grid is structurally equivalent to this Hcomp.
    *
    * @param other
-   *   The grid to compare to this grid.
+   *   The HComp to compare to this grid.
    *
    * @return true if the two blocks are structurally equivalent and
    *    false otherwise.
    */
   public boolean eqv(HComp other) {
-    return (Arrays.equals(this.blocks, other.blocks) && this.align == other.align);
-  } // eqv(Grid)
+   if (!this.align.equals(other.align)) {
+    return false;
+   } //if
+   for (int i = 0; i < this.blocks.length; i++){
+      if(!this.blocks[i].eqv(other.blocks[i])) {
+      return false;
+    }
+  }
+  return true;
+  } // eqv(HComp)
 } // class HComp
