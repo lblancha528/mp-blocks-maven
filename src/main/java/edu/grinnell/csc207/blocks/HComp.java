@@ -78,13 +78,13 @@ public class HComp implements AsciiBlock {
     if (rowNum > maxheight) {
       throw new Exception("ERROR: Out of bound value!");
     } //if
-    
+
     for (int blockNum = 0; blockNum < this.blocks.length; blockNum++) {
       int blockwidth = this.blocks[blockNum].width();
       int blockheight = this.blocks[blockNum].height();
       AsciiBlock block = this.blocks[blockNum];
 
-      if (this.align == VAlignment.TOP){
+      if (this.align == VAlignment.TOP) {
         offset = 0;
       } else if (this.align == VAlignment.CENTER) {
         offset = (maxheight - blockheight) / 2;
@@ -97,7 +97,7 @@ public class HComp implements AsciiBlock {
       if (rowNum < offset || rowNum >= offset + blockheight) {
         roww = roww.concat(" ".repeat(blockwidth));
       } else {
-        roww = roww.concat(block.row(rowNum-offset));
+        roww = roww.concat(block.row(rowNum - offset));
       } //if
     } //for
     return roww;
@@ -154,14 +154,14 @@ public class HComp implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(HComp other) {
-   if (!this.align.equals(other.align)) {
-    return false;
-   } //if
-   for (int i = 0; i < this.blocks.length; i++){
-      if(!this.blocks[i].eqv(other.blocks[i])) {
+    if (!this.align.equals(other.align)) {
       return false;
-    }
-  }
-  return true;
+    } //if
+    for (int i = 0; i < this.blocks.length; i++) {
+      if (!this.blocks[i].eqv(other.blocks[i])) {
+        return false;
+      } // if
+    } // for
+    return true;
   } // eqv(HComp)
 } // class HComp

@@ -91,5 +91,4 @@ public class VFlip implements AsciiBlock {
   public boolean eqv(VFlip other) {
     return this.block.eqv(other.block);
   } // eqv(Grid)
-  
 } // class VFlip

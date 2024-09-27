@@ -86,37 +86,36 @@ public class VComp implements AsciiBlock {
     // j is now a valid row in the right block
 
     int gap = findGap(blocks[j]);
-    String Lgap = "";
-    String Rgap = "";
-    String Fgap = "";
+    String lGap = "";
+    String rGap = "";
+    String fGap = "";
     if ((gap % 2) == 1) {
       // if gap is odd, put larger chunk in Rgap
-      Fgap = " ".repeat(gap);
-      Lgap = " ".repeat(gap / 2);
-      Rgap = " ".repeat(gap / 2 + 1);
+      fGap = " ".repeat(gap);
+      lGap = " ".repeat(gap / 2);
+      rGap = " ".repeat(gap / 2 + 1);
     } else {
-      Fgap = " ".repeat(gap);
-      Lgap = " ".repeat(gap / 2);
-      Rgap = " ".repeat(gap / 2);
+      fGap = " ".repeat(gap);
+      lGap = " ".repeat(gap / 2);
+      rGap = " ".repeat(gap / 2);
     } // else
 
     if (align == HAlignment.LEFT) {
-      roww = blocks[j].row(i).concat(Fgap);
+      roww = blocks[j].row(i).concat(fGap);
     } else if (align == HAlignment.CENTER) {
-      roww = Lgap.concat(blocks[j].row(i));
-      roww = roww.concat(Rgap);
+      roww = lGap.concat(blocks[j].row(i));
+      roww = roww.concat(rGap);
     } else if (align == HAlignment.RIGHT) {
-      roww = Fgap.concat(blocks[j].row(i));
+      roww = fGap.concat(blocks[j].row(i));
     } else {
       System.err.println("ERROR: Invalid alignment.");
-    }
+    } // if
     return roww;
   } // row(int)
 
   /**
    * Get the top and bottom gap size for a block.
    * Prioritizes less space on top.
-   * 
    * @param block
    *   the block to be analyzed
    * @return gap
@@ -179,13 +178,13 @@ public class VComp implements AsciiBlock {
    */
   public boolean eqv(VComp other) {
     if (!this.align.equals(other.align)) {
-     return false;
+      return false;
     } //if
-    for (int i = 0; i < this.blocks.length; i++){
-       if(!this.blocks[i].eqv(other.blocks[i])) {
-       return false;
-     }
-   }
-   return true;
-   } // eqv(VComp)
+    for (int i = 0; i < this.blocks.length; i++) {
+      if (!this.blocks[i].eqv(other.blocks[i])) {
+        return false;
+      } // if
+    } // for
+    return true;
+  } // eqv(VComp)
 } // class VComp

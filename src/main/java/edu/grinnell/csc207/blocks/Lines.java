@@ -113,6 +113,4 @@ public class Lines implements AsciiBlock {
   public boolean eqv(AsciiBlock other) {
     return ((other instanceof Lines) && (this.eqv((Lines) other)));
   } // eqv(AsciiBlock)
-
-  
 } // class Lines

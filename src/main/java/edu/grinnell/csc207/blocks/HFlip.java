@@ -48,7 +48,7 @@ public class HFlip implements AsciiBlock {
     int maxheight = this.height();
     int maxwidth = this.width();
 
-    if (i > maxheight){
+    if (i > maxheight) {
       System.err.println("the value exceeds the maximum height available");
     } //if
 
@@ -103,5 +103,4 @@ public class HFlip implements AsciiBlock {
   public boolean eqv(HFlip other) {
     return this.block.eqv(other.block);
   } // eqv(Grid)
-  
 } // class HFlip

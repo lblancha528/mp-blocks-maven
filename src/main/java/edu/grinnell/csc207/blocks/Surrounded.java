@@ -34,12 +34,14 @@ public class Surrounded implements AsciiBlock {
   /**
    * Construct a block by surrounding the provided AsciiBlock with the provided character.
    * @param block
-   * @param char
+   *   the block that will be surrounded
+   * @param ch
+   *   the character to surround the block with
    */
   public Surrounded(AsciiBlock block, char ch) {
     this.contents = block;
     this.boxChar = ch + "";
-  }
+  } // Surrounded(AsciiBlock, char)
 
   // +----------------+----------------------------------------------
   // | Static methods |
@@ -92,8 +94,8 @@ public class Surrounded implements AsciiBlock {
    * @return true if they are structurally equivalent and false otherwise.
    */
   public static boolean eqv(AsciiBlock block1, AsciiBlock block2) {
-    return ((block1 instanceof Surrounded) && (block1.eqv((Surrounded) block1)) && 
-    (block2 instanceof Surrounded) && (block2.eqv((Surrounded) block2)));
+    return ((block1 instanceof Surrounded) && (block1.eqv((Surrounded) block1))
+      && (block2 instanceof Surrounded) && (block2.eqv((Surrounded) block2)));
   } // eqv(AsciiBlock, AsciiBlock)
 
 

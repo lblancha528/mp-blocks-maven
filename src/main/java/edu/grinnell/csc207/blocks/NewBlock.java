@@ -26,6 +26,16 @@ public class NewBlock implements AsciiBlock {
   // +-------------+-------------------------------------------------------
   // | Constructor |
   // +-------------+
+
+  /**
+   * Build a NewBlock from two AsciiBlocks.
+   * The new block will 'shuffle' the two blocks together
+   * by alteranating lines from each.
+   * @param blockA
+   *    the first AsciiBlock to mix, odd lines
+   * @param blockB
+   *    the second AsciiBlock to mix, even lines
+   */
   public NewBlock(AsciiBlock blockA, AsciiBlock blockB) {
     this.blockA = blockA;
     this.blockB = blockB;
@@ -58,7 +68,7 @@ public class NewBlock implements AsciiBlock {
   public String row(int i) throws Exception {
     if (i > this.height()) {
       throw new Exception("Error: Row does not exist!");
-    }
+    } // if
     if (i == 0) {
       return blockA.row(0);
     } else if (i % 2 == 1) {
@@ -106,4 +116,4 @@ public class NewBlock implements AsciiBlock {
   public boolean eqv(AsciiBlock other) {
     return false; //STUB
   };
-}
+} // class NewBlock

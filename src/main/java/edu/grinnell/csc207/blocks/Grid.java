@@ -80,7 +80,7 @@ public class Grid implements AsciiBlock {
    * @return the number of rows
    */
   public int height() {
-    return this.element.height()*vreps; 
+    return this.element.height() * vreps;
   } // height()
 
   /**
@@ -89,7 +89,7 @@ public class Grid implements AsciiBlock {
    * @return the number of columns
    */
   public int width() {
-    return this.element.width()*hreps; 
+    return this.element.width() * hreps;
   } // width()
 
   /**
