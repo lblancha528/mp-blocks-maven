@@ -19,4 +19,4 @@ You can create a new block from another by flipping it horizontally or verticall
 
 ---
 
-This code may be found at <https://github.com/yantiffa/mp-blocks-maven>. The original project can be found at <https://github.com/Grinnell-CSC207/mp-blocks-maven>.
+This code may be found at <https://github.com/lblancha528/mp-blocks-maven>. The original project can be found at <https://github.com/Grinnell-CSC207/mp-blocks-maven>.
