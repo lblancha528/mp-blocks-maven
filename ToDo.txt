@@ -1,2 +1,0 @@
-- Implement AsciiBlock.eqv()
-        - NewBlock does not handle composing with NewBlocks
