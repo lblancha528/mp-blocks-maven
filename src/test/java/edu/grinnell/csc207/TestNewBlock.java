@@ -1,28 +1,22 @@
 package edu.grinnell.csc207;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.Test;
 import edu.grinnell.csc207.blocks.AsciiBlock;
-import edu.grinnell.csc207.blocks.Grid;
-import edu.grinnell.csc207.blocks.Line;
-import edu.grinnell.csc207.blocks.Rect;
-import edu.grinnell.csc207.blocks.NewBlock;
 import edu.grinnell.csc207.blocks.Boxed;
+import edu.grinnell.csc207.blocks.Empty;
+import edu.grinnell.csc207.blocks.Grid;
+import edu.grinnell.csc207.blocks.HAlignment;
 import edu.grinnell.csc207.blocks.HComp;
 import edu.grinnell.csc207.blocks.HFlip;
+import edu.grinnell.csc207.blocks.Line;
+import edu.grinnell.csc207.blocks.NewBlock;
+import edu.grinnell.csc207.blocks.Rect;
+import edu.grinnell.csc207.blocks.Surrounded;
+import edu.grinnell.csc207.blocks.VAlignment;
 import edu.grinnell.csc207.blocks.VComp;
 import edu.grinnell.csc207.blocks.VFlip;
-import edu.grinnell.csc207.blocks.VAlignment;
-import edu.grinnell.csc207.blocks.HAlignment;
-import edu.grinnell.csc207.blocks.Surrounded;
-import edu.grinnell.csc207.blocks.Empty;
 
 /**
  * Tests of the new block.
@@ -212,7 +206,7 @@ public class TestNewBlock {
                     aaabbbb
                     bbbbaaa
                     aaabbbb
-                    bbbb   
+                    bbbb
                     """
       , TestUtils.toString(hAndH), "aB/bA");
       assertEquals("""
@@ -278,7 +272,7 @@ public class TestNewBlock {
   @Test
   public void newBlockWithFlipTests() {
     try {
-      Line hello = new Line("hello");
+      Line hello = new Line("hello-");
       Line goodbye = new Line("goodbye");
       Line howdydo = new Line("howdydo");
       VComp greetings = new VComp(HAlignment.CENTER, new AsciiBlock[] {hello, goodbye, howdydo});
@@ -293,7 +287,7 @@ public class TestNewBlock {
       assertEquals(6, upAndDown.height(), "up/down height");
 
       assertEquals("""
-                     hello 
+                    hello 
                      olleh 
                     goodbye
                     eybdoog

@@ -116,6 +116,6 @@ public class NewBlock implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false; //STUB
+    return ((other instanceof NewBlock) && (this.eqv((NewBlock) other)));
   };
 } // class NewBlock
