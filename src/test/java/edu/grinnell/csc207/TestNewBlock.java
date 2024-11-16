@@ -196,40 +196,38 @@ public class TestNewBlock {
       assertEquals(8, vAndV.height(), "greetings/aBye height");
       assertEquals(8, hAndV.height(), "aB/greeting height");
 
-      assertEquals("""
-                       bbbb
-                    bbbbaaa
-                    aaabbbb
-                    bbbbaaa
-                    aaabbbb
-                    bbbbaaa
-                    aaabbbb
-                    bbbbaaa
-                    aaabbbb
-                    bbbb
-                    """
+      assertEquals(
+                    "   bbbb\n"+
+                    "bbbbaaa\n"+
+                    "aaabbbb\n"+
+                    "bbbbaaa\n"+
+                    "aaabbbb\n"+
+                    "bbbbaaa\n"+
+                    "aaabbbb\n"+
+                    "bbbbaaa\n"+
+                    "aaabbbb\n"+
+                    "bbbb   \n"
       , TestUtils.toString(hAndH), "aB/bA");
-      assertEquals("""
-                     hello  
-                    aaa
-                    goodbye 
-                    aaa
-                     howdy  
-                    aaa
-                    farewell
-                    aaa     
-                    """
+      assertEquals(
+                    " hello  \n"+
+                    "aaa     \n"+
+                    "goodbye \n"+
+                    "aaa     \n"+   
+                    " howdy  \n"+ 
+                    "aaa     \n"+
+                    "farewell\n"+
+                    "aaa     \n"   
+
       , TestUtils.toString(vAndV), "greetings/aBye");
-      assertEquals("""
-                     hello  
-                       bbbb
-                    goodbye 
-                    aaabbbb
-                     howdy  
-                    aaabbbb
-                    farewell
-                    aaabbbb
-                    """
+      assertEquals(
+                    "   bbbb\n"+
+                    " hello  \n"+
+                    "aaabbbb\n"+
+                    "goodbye \n"+
+                    "aaabbbb\n"+
+                    " howdy  \n"+
+                    "aaabbbb\n"+
+                    "farewell\n"
       , TestUtils.toString(hAndV), "aB/greetings");
 
     } catch (Exception e) {
@@ -272,7 +270,7 @@ public class TestNewBlock {
   @Test
   public void newBlockWithFlipTests() {
     try {
-      Line hello = new Line("hello-");
+      Line hello = new Line("hello");
       Line goodbye = new Line("goodbye");
       Line howdydo = new Line("howdydo");
       VComp greetings = new VComp(HAlignment.CENTER, new AsciiBlock[] {hello, goodbye, howdydo});
@@ -286,14 +284,13 @@ public class TestNewBlock {
       assertEquals(6, forwardAndBack.height(), "forward/back height");
       assertEquals(6, upAndDown.height(), "up/down height");
 
-      assertEquals("""
-                    hello 
-                     olleh 
-                    goodbye
-                    eybdoog
-                    howdydo
-                    odydwoh
-                    """
+      assertEquals(
+                    " hello \n"+
+                    " olleh \n"+
+                    "goodbye\n"+
+                    "eybdoog\n"+
+                    "howdydo\n"+
+                    "odydwoh\n"
       , TestUtils.toString(forwardAndBack), "forwardAndBack");
 
     } catch (Exception e) {

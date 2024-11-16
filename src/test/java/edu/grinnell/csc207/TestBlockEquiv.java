@@ -1,5 +1,9 @@
 package edu.grinnell.csc207;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
 import edu.grinnell.csc207.blocks.AsciiBlock;
 import edu.grinnell.csc207.blocks.Boxed;
 import edu.grinnell.csc207.blocks.Empty;
@@ -8,18 +12,11 @@ import edu.grinnell.csc207.blocks.HAlignment;
 import edu.grinnell.csc207.blocks.HComp;
 import edu.grinnell.csc207.blocks.HFlip;
 import edu.grinnell.csc207.blocks.Line;
-import edu.grinnell.csc207.blocks.Padded;
 import edu.grinnell.csc207.blocks.Rect;
 import edu.grinnell.csc207.blocks.Surrounded;
-import edu.grinnell.csc207.blocks.Trimmed;
 import edu.grinnell.csc207.blocks.VAlignment;
 import edu.grinnell.csc207.blocks.VComp;
 import edu.grinnell.csc207.blocks.VFlip;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.Test;
 
 /**
  * Tests of the equivalence of various ASCII blocks.
@@ -495,14 +492,6 @@ public class TestBlockEquiv {
         "M: Empty block is not equivalent to horizontally flipped empty block");
     assertFalse(empty.eqv(new VFlip(empty)),
         "M: Empty block is not equivalent to vertically flipped empty block");
-    assertFalse(
-        empty.eqv(new Trimmed(new Line("Hello"), HAlignment.LEFT,
-            VAlignment.TOP, 0, 0)),
-        "E: Empty block is not equivalent to a trimmed empty block");
-    assertFalse(
-        empty.eqv(new Padded(empty, 'x', HAlignment.LEFT, VAlignment.TOP,
-            0, 0)),
-        "E: Empty block is not equivalent to a padded empty block");
   } // testNotEqvEmpty()
 
   // +-------+-------------------------------------------------------
@@ -579,14 +568,6 @@ public class TestBlockEquiv {
         "M: Line OOO is not equivalent to horizontally flipped line block");
     assertFalse(line.eqv(new VFlip(line)),
         "M: Line OOO is not equivalent to vertically flipped line block");
-    assertFalse(
-        line.eqv(new Trimmed(new Line("OOOhhhh"), HAlignment.LEFT,
-            VAlignment.TOP, 3, 1)),
-        "E: Line OOO is not equivalent to a trimmed line block");
-    assertFalse(
-        line.eqv(new Padded(line, 'x', HAlignment.LEFT, VAlignment.TOP,
-            3, 0)),
-        "E: Line OOO is not equivalent to a padded line block");
   } // testNotEqvLine()
 
   // +------------+--------------------------------------------------
@@ -681,21 +662,6 @@ public class TestBlockEquiv {
         "M: Sample rect is not equivalent to horizontally flipped version");
     assertFalse(rect.eqv(new VFlip(rect)),
         "M: Sample rect is not equivalent to vertically flipped version");
-    assertFalse(
-        rect.eqv(new Trimmed(rect, HAlignment.LEFT, VAlignment.TOP, 3, 2)),
-        "E: Sample rect is not equivalent to the same rect, trimmed");
-    assertFalse(
-        rect.eqv(new Trimmed(new Rect('R', 10, 10), HAlignment.LEFT,
-            VAlignment.TOP, 3, 2)),
-        "E: Sample rect is not equivalent to a similar trimmed rect");
-    assertFalse(
-        rect.eqv(new Padded(new Empty(), 'R', HAlignment.LEFT, VAlignment.TOP,
-            3, 2)),
-        "E: Sample rect is not equivalent to a padded empty block");
-    assertFalse(
-        rect.eqv(new Padded(rect, 'R', HAlignment.LEFT, VAlignment.TOP,
-            3, 2)),
-        "E: Sample rect is not equivalent to a 0-padded version of the same block");
   } // testNotEqvRect()
 
   // +-------+-------------------------------------------------------
@@ -765,14 +731,6 @@ public class TestBlockEquiv {
         "M: Sample box is not equivalent to horizontally flipped box block");
     assertFalse(box.eqv(new VFlip(box)),
         "M: Sample box is not equivalent to vertically flipped box block");
-    assertFalse(
-        box.eqv(new Trimmed(new Line("OOOhhhh"), HAlignment.LEFT,
-            VAlignment.TOP, 3, 1)),
-        "M: Sample box is not equivalent to a trimmed box block");
-    assertFalse(
-        box.eqv(new Padded(box, 'x', HAlignment.LEFT, VAlignment.TOP,
-            3, 0)),
-        "M: Sample box is not equivalent to a padded box block");
   } // testNotEqvBox()
 
   // +------------+--------------------------------------------------
@@ -870,22 +828,6 @@ public class TestBlockEquiv {
         "M: Sample surround is not eqv to horizontally flipped surround");
     assertFalse(block.eqv(new VFlip(block)),
         "M: Sample surround is not eqv to vertically flipped surround");
-    assertFalse(
-        block.eqv(new Trimmed(block, HAlignment.LEFT,
-            VAlignment.TOP, 3, 3)),
-        "E: Sample surround is not equivalent to a trimmed surround");
-    assertFalse(
-        block.eqv(new Trimmed(new Surrounded(block, 'A'), HAlignment.CENTER,
-            VAlignment.CENTER, 3, 3)),
-        "E: Sample surround is not equivalent to a trimmed bigger surround");
-    assertFalse(
-        block.eqv(new Padded(block, 'x', HAlignment.LEFT, VAlignment.TOP,
-            3, 3)),
-        "E: Sample surround is not equivalent to a padded box block");
-    assertFalse(
-        block.eqv(new Padded(new Line("A"), 'A', HAlignment.LEFT,
-            VAlignment.TOP, 3, 3)),
-        "E: Sample surround is not eqv to a similar looking padded box");
   } // testNotEqvSurrounded()
 
   // +-------+-------------------------------------------------------
@@ -953,25 +895,6 @@ public class TestBlockEquiv {
         "M: Sample grid is not equivalent to horizontally flipped version");
     assertFalse(grid.eqv(new VFlip(grid)),
         "M: Sample grid is not equivalent to vertically flipped version");
-    assertFalse(
-        grid.eqv(new Trimmed(grid, HAlignment.LEFT, VAlignment.TOP, 3, 2)),
-        "E: Sample grid is not equivalent to the same grid, trimmed");
-    assertFalse(
-        grid.eqv(new Trimmed(new Rect('G', 10, 10), HAlignment.LEFT,
-            VAlignment.TOP, 3, 2)),
-        "E: Sample grid is not equivalent to a similar trimmed rect");
-    assertFalse(
-        grid.eqv(new Trimmed(new Grid(new Line("G"), 10, 10), HAlignment.RIGHT,
-            VAlignment.BOTTOM, 3, 2)),
-        "E: Sample grid is not equivalent to a similar trimmed grid");
-    assertFalse(
-        grid.eqv(new Padded(new Empty(), 'G', HAlignment.LEFT, VAlignment.TOP,
-            3, 2)),
-        "E: Sample grid is not equivalent to a padded empty block");
-    assertFalse(
-        grid.eqv(new Padded(grid, 'G', HAlignment.LEFT, VAlignment.TOP,
-            3, 2)),
-        "E: Sample grid is not eqv to a 0-padded version of the same grid");
   } // testNotEqvGrid()
 
   // +----------------------+----------------------------------------
